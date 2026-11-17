@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>일괄 변환</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+body{margin:0;background:#0E1014}
+a{color:#9AA8FF}a:hover{color:#C3CBFF}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="min-height: 900px; display: flex; flex-direction: column; background: #0E1014; color: #E8EAF0; font-family: 'IBM Plex Sans KR', system-ui, sans-serif; font-size: 14px">
+  <header style="height: 48px; display: flex; align-items: center; gap: 10px; padding: 0 18px; border-bottom: 1px solid #1F2430; background: #0B0D11">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7C8CFF" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M3 12h2M7 8v8M11 4v16M15 8v8M19 11v2"/></svg>
+    <span style="font-weight: 700">HanTTS Studio</span>
+    <span style="color: #7F889B; font-size: 13px">· 일괄 변환</span>
+  </header>
+  <div style="flex: 1; display: flex; flex-wrap: wrap; min-height: 0">
+    <nav aria-label="주 메뉴" style="flex: 0 0 84px; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 14px 0; border-right: 1px solid #1F2430; background: #0B0D11">
+      <sc-for list="{{nav}}" as="item" hint-placeholder-count="6">
+        <a href="{{item.href}}" style="width: 68px; min-height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; border-radius: 12px; text-decoration: none; font-size: 12px; font-weight: 500; background: {{item.bg}}; color: {{item.fg}}">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{item.d}}"/></svg>
+          <span>{{item.label}}</span>
+        </a>
+      </sc-for>
+    </nav>
+
+    <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 18px; padding: 28px 32px">
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <h1 style="margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -0.02em">일괄 변환</h1>
+        <p style="margin: 0; color: #9AA3B5; font-size: 15px">여러 원고를 한 번에 음성 파일로 만듭니다. 창을 닫아도 대기열은 유지됩니다.</p>
+      </div>
+
+      <button style="display: flex; align-items: center; justify-content: center; gap: 14px; min-height: 92px; border-radius: 16px; border: 1.5px dashed #3A4152; background: #11141A; color: #C5CBD8; cursor: pointer; font-size: 15px">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#9AA8FF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M12 11v6M9 14l3-3 3 3"/></svg>
+        <span>파일을 여기로 끌어오거나 <span style="color: #9AA8FF; font-weight: 600">찾아보기</span> · .txt .md .docx .srt</span>
+      </button>
+
+      <section aria-label="대기열" style="background: #151820; border: 1px solid #222734; border-radius: 16px; overflow: hidden">
+        <div style="overflow-x: auto">
+          <table style="width: 100%; min-width: 720px; border-collapse: collapse; font-size: 13px">
+            <thead>
+              <tr style="text-align: left; color: #9AA3B5; font-size: 12px">
+                <th style="padding: 12px 16px; font-weight: 500; border-bottom: 1px solid #222734">파일</th>
+                <th style="padding: 12px 16px; font-weight: 500; border-bottom: 1px solid #222734">글자 수</th>
+                <th style="padding: 12px 16px; font-weight: 500; border-bottom: 1px solid #222734; width: 34%">진행</th>
+                <th style="padding: 12px 16px; font-weight: 500; border-bottom: 1px solid #222734">결과</th>
+                <th style="padding: 12px 16px; border-bottom: 1px solid #222734"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">작업</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{rows}}" as="r" hint-placeholder-count="6">
+                <tr>
+                  <td style="padding: 12px 16px; border-bottom: 1px solid #1C202B">
+                    <span style="display: flex; align-items: center; gap: 10px">
+                      <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; color: #C5CBD8; background: #1B1F29; border: 1px solid #262B38; padding: 3px 6px; border-radius: 5px">{{r.ext}}</span>
+                      <span style="font-weight: 500">{{r.name}}</span>
+                    </span>
+                  </td>
+                  <td style="padding: 12px 16px; border-bottom: 1px solid #1C202B; font-family: 'JetBrains Mono', monospace; color: #C5CBD8">{{r.chars}}</td>
+                  <td style="padding: 12px 16px; border-bottom: 1px solid #1C202B">
+                    <span style="display: flex; align-items: center; gap: 10px">
+                      <span style="flex: 1; height: 6px; border-radius: 3px; background: #232835; overflow: hidden"><span style="display: block; height: 100%; width: {{r.pct}}; background: {{r.barColor}}"></span></span>
+                      <span style="width: 92px; font-size: 12px; color: {{r.stColor}}">{{r.status}}</span>
+                    </span>
+                  </td>
+                  <td style="padding: 12px 16px; border-bottom: 1px solid #1C202B; color: #9AA3B5; font-family: 'JetBrains Mono', monospace; font-size: 12px">{{r.result}}</td>
+                  <td style="padding: 8px 12px; border-bottom: 1px solid #1C202B; text-align: right">
+                    <button style="height: 36px; padding: 0 12px; border-radius: 9px; border: 1px solid #2E3442; background: transparent; color: #C5CBD8; font-size: 12px; cursor: pointer">{{r.action}}</button>
+                  </td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section aria-label="전체 진행" style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 16px 18px; background: #151820; border: 1px solid #222734; border-radius: 16px">
+        <div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 8px">
+          <div style="display: flex; justify-content: space-between; font-size: 13px"><span><span style="font-weight: 600">3 / 6 파일</span> <span style="color: #9AA3B5">· 오류 1 · 약 4분 남음</span></span><span style="font-family: 'JetBrains Mono', monospace">47%</span></div>
+          <div style="height: 8px; border-radius: 4px; background: #232835; overflow: hidden"><div style="width: 47%; height: 100%; background: #7C8CFF"></div></div>
+        </div>
+        <button style="height: 44px; padding: 0 16px; border-radius: 12px; border: 1px solid #2E3442; background: transparent; color: #E8EAF0; font-weight: 600; cursor: pointer">중지</button>
+        <button style="height: 44px; padding: 0 18px; border-radius: 12px; border: 0; background: #7C8CFF; color: #0E1014; font-weight: 700; cursor: pointer">일시정지</button>
+      </section>
+    </main>
+
+    <aside aria-label="변환 설정" style="flex: 1 1 320px; max-width: 380px; display: flex; flex-direction: column; gap: 16px; padding: 24px 20px; border-left: 1px solid #1F2430; background: #11141A">
+      <h2 style="margin: 0; font-size: 15px; font-weight: 600">공통 설정</h2>
+      <sc-for list="{{fields}}" as="f" hint-placeholder-count="6">
+        <label style="display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 12px; color: #9AA3B5">{{f.label}}</span>
+          <span style="height: 44px; display: flex; align-items: center; gap: 8px; padding: 0 12px; background: #151820; border: 1px solid #2E3442; border-radius: 10px">
+            <span style="flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: {{f.font}}; font-size: 13px">{{f.value}}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9AA3B5" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </label>
+      </sc-for>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <span style="font-size: 12px; color: #9AA3B5">동시 작업 수</span>
+        <div role="group" aria-label="동시 작업 수" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
+          <button style="height: 40px; border-radius: 10px; border: 1px solid #2E3442; background: transparent; color: #C5CBD8; cursor: pointer">1</button>
+          <button aria-pressed="true" style="height: 40px; border-radius: 10px; border: 1px solid #7C8CFF; background: #1B2140; color: #C3CBFF; font-weight: 700; cursor: pointer">2</button>
+          <button style="height: 40px; border-radius: 10px; border: 1px solid #2E3442; background: transparent; color: #C5CBD8; cursor: pointer">3</button>
+          <button style="height: 40px; border-radius: 10px; border: 1px solid #2E3442; background: transparent; color: #C5CBD8; cursor: pointer">4</button>
+        </div>
+        <span style="font-size: 12px; color: #7F889B">CPU 사용량이 높아지면 1~2를 권장합니다.</span>
+      </div>
+    </aside>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var navDefs = [
+      ['작업', 'Main.dc.html', 'M3 12h2M7 8v8M11 4v16M15 8v8M19 11v2'],
+      ['엔진', 'EngineManager.dc.html', 'M7 4h10a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3zM9 9h6v6H9z'],
+      ['일괄', 'Batch.dc.html', 'M12 3l9 5-9 5-9-5zM3 13l9 5 9-5'],
+      ['비교', 'Compare.dc.html', 'M4 5h7v14H4zM13 5h7v14h-7z'],
+      ['사전', '#', 'M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3zM5 17a3 3 0 0 1 3-3h11'],
+      ['기록', '#', 'M20 12a8 8 0 1 1-16 0a8 8 0 1 1 16 0zM12 8v4l3 2']
+    ];
+    var nav = navDefs.map(function (d, i) {
+      return { label: d[0], href: d[1], d: d[2], bg: i === 2 ? '#1B2140' : 'transparent', fg: i === 2 ? '#C3CBFF' : '#9AA3B5' };
+    });
+    var S = {
+      done: ['완료', '#3DD68C', '#5FE3A1', '열기'],
+      run: ['생성 중', '#7C8CFF', '#9AA8FF', '중지'],
+      err: ['오류', '#FF6B6B', '#FF9A9A', '다시 시도'],
+      wait: ['대기', '#232835', '#9AA3B5', '제거']
+    };
+    var rows = [
+      ['TXT', '01_인트로.txt', '1,204', 'done', '100%', '01_인트로_S3_F1.mp3'],
+      ['DOCX', '02_본문_1장.docx', '8,930', 'done', '100%', '02_본문_1장_S3_F1.mp3'],
+      ['MD', '03_본문_2장.md', '7,412', 'run', '38%', '문장 41/108'],
+      ['SRT', '04_자막_번역본.srt', '3,066', 'err', '12%', '문장 6: 텍스트가 너무 김'],
+      ['TXT', '05_아웃트로.txt', '980', 'wait', '0%', '—'],
+      ['TXT', '06_공지.txt', '412', 'wait', '0%', '—']
+    ].map(function (r) {
+      var s = S[r[3]];
+      return { ext: r[0], name: r[1], chars: r[2], pct: r[4], result: r[5], status: s[0], barColor: s[1], stColor: s[2], action: s[3] };
+    });
+    var sans = "'IBM Plex Sans KR', sans-serif", mono = "'JetBrains Mono', monospace";
+    var fields = [
+      ['엔진', 'Supertonic 3', sans], ['음성', '여성 1 · F1', sans], ['프리셋', '유튜브 내레이션', sans],
+      ['출력 형식', 'MP3 · 44.1kHz · -16 LUFS · SRT 포함', sans],
+      ['출력 폴더', 'D:\\오디오북\\출력', mono], ['파일 이름 규칙', '{name}_{engine}_{voice}', mono]
+    ].map(function (f) { return { label: f[0], value: f[1], font: f[2] }; });
+    return { nav: nav, rows: rows, fields: fields };
+  }
+}
+</script>
+</body>
+</html>

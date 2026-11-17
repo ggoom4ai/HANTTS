@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>첫 실행 마법사</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+body{margin:0;background:#07080B}
+a{color:#9AA8FF}a:hover{color:#C3CBFF}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="min-height: 900px; display: flex; align-items: center; justify-content: center; padding: 40px 20px; box-sizing: border-box; background: #07080B; color: #E8EAF0; font-family: 'IBM Plex Sans KR', system-ui, sans-serif; font-size: 14px">
+  <section aria-label="HanTTS 시작하기" style="width: 100%; max-width: 1040px; min-height: 620px; display: flex; flex-wrap: wrap; background: #151820; border: 1px solid #2E3442; border-radius: 26px; overflow: hidden">
+
+    <div style="flex: 1 1 360px; display: flex; flex-direction: column; justify-content: space-between; gap: 32px; padding: 40px; background: #1B2140">
+      <div style="display: flex; align-items: center; gap: 10px">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C3CBFF" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M3 12h2M7 8v8M11 4v16M15 8v8M19 11v2"/></svg>
+        <span style="font-weight: 700; font-size: 16px">HanTTS Studio</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 16px">
+        <h1 style="margin: 0; font-size: 38px; line-height: 1.25; font-weight: 700; letter-spacing: -0.03em">GPU 없이,<br>내 PC에서 만드는<br>한국어 음성</h1>
+        <p style="margin: 0; color: #C3CBFF; font-size: 15px; line-height: 1.6">원고는 인터넷으로 보내지 않습니다. 필요한 엔진만 골라 한 번 내려받으면 오프라인에서도 동작합니다.</p>
+      </div>
+      <div style="display: flex; align-items: flex-end; gap: 4px; height: 64px" aria-hidden="true">
+        <sc-for list="{{deco}}" as="d" hint-placeholder-count="36">
+          <span style="flex: 1 1 0; border-radius: 3px; background: #7C8CFF; height: {{d.h}}; opacity: {{d.o}}"></span>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="flex: 999 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 24px; padding: 40px">
+      <div style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: #9AA3B5">
+        <span style="font-family: 'JetBrains Mono', monospace">{{stepText}}</span>
+        <span style="flex: 1; height: 4px; border-radius: 2px; background: #232835; overflow: hidden"><span style="display: block; height: 100%; background: #7C8CFF; width: {{stepPct}}"></span></span>
+      </div>
+
+      <sc-if value="{{s1}}" hint-placeholder-val="{{true}}">
+        <div style="display: flex; flex-direction: column; gap: 18px">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <h2 style="margin: 0; font-size: 24px; font-weight: 700">주로 무엇을 만드시나요?</h2>
+            <p style="margin: 0; color: #9AA3B5">용도에 맞는 엔진을 추천해 드릴게요. 나중에 언제든 바꿀 수 있습니다.</p>
+          </div>
+          <sc-for list="{{uses}}" as="u" hint-placeholder-count="3">
+            <button onClick="{{u.pick}}" aria-pressed="{{u.pressed}}" style="display: flex; align-items: center; gap: 16px; padding: 18px; border-radius: 16px; text-align: left; cursor: pointer; background: {{u.bg}}; border: {{u.border}}; color: #E8EAF0">
+              <span style="width: 44px; height: 44px; flex: 0 0 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: #262B38; color: #C3CBFF">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{u.d}}"/></svg>
+              </span>
+              <span style="flex: 1; display: flex; flex-direction: column; gap: 3px">
+                <span style="font-weight: 700; font-size: 15px">{{u.title}}</span>
+                <span style="color: #9AA3B5; font-size: 13px">{{u.sub}}</span>
+              </span>
+              <span style="width: 22px; height: 22px; border-radius: 50%; flex: 0 0 22px; box-sizing: border-box; border: {{u.radio}}"></span>
+            </button>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{s2}}" hint-placeholder-val="{{false}}">
+        <div style="display: flex; flex-direction: column; gap: 18px">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <h2 style="margin: 0; font-size: 24px; font-weight: 700">추천 엔진</h2>
+            <p style="margin: 0; color: #9AA3B5">{{recWhy}}</p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 14px; padding: 20px; border-radius: 18px; background: #11141A; border: 1px solid #3A4680">
+            <div style="display: flex; align-items: center; gap: 14px">
+              <span style="width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-weight: 700; background: {{recMarkBg}}; color: {{recMarkFg}}">{{recMark}}</span>
+              <div style="flex: 1; display: flex; flex-direction: column; gap: 4px">
+                <span style="font-size: 18px; font-weight: 700">{{recName}}</span>
+                <span style="font-size: 13px; color: #9AA3B5">{{recMeta}}</span>
+              </div>
+              <span style="font-size: 12px; font-weight: 700; color: #0E1014; background: #7C8CFF; padding: 4px 10px; border-radius: 999px">추천</span>
+            </div>
+            <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #C5CBD8; line-height: 1.5; cursor: pointer">
+              <input type="checkbox" checked="{{true}}" style="width: 18px; height: 18px; margin: 1px 0 0; accent-color: #7C8CFF">
+              <span>{{recLicense}}</span>
+            </label>
+          </div>
+          <span style="font-size: 13px; color: #9AA3B5">다른 엔진도 나중에 <a href="EngineManager.dc.html">엔진</a> 메뉴에서 설치할 수 있습니다.</span>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{s3}}" hint-placeholder-val="{{false}}">
+        <div style="display: flex; flex-direction: column; gap: 18px">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <h2 style="margin: 0; font-size: 24px; font-weight: 700">저장 위치 확인</h2>
+            <p style="margin: 0; color: #9AA3B5">엔진과 모델은 이 폴더에 저장됩니다. 용량이 넉넉한 드라이브를 고르세요.</p>
+          </div>
+          <label style="display: flex; flex-direction: column; gap: 6px">
+            <span style="font-size: 12px; color: #9AA3B5">데이터 폴더</span>
+            <span style="display: flex; gap: 8px">
+              <input value="C:\Users\홍길동\AppData\Local\HanTTS" aria-label="데이터 폴더 경로" style="flex: 1; min-width: 0; height: 44px; padding: 0 12px; background: #11141A; border: 1px solid #2E3442; border-radius: 10px; color: #E8EAF0; font-family: 'JetBrains Mono', monospace; font-size: 12px">
+              <button style="height: 44px; padding: 0 14px; border-radius: 10px; border: 1px solid #2E3442; background: transparent; color: #E8EAF0; cursor: pointer">변경</button>
+            </span>
+            <span style="font-size: 12px; color: #5FE3A1">사용 가능 214GB · {{recNeed}}</span>
+          </label>
+          <div style="display: flex; flex-direction: column; gap: 10px; padding: 16px; border-radius: 14px; background: #11141A; border: 1px solid #222734">
+            <span style="display: flex; align-items: center; gap: 10px; font-size: 13px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5FE3A1" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>관리자 권한 없이 설치됩니다</span>
+            <span style="display: flex; align-items: center; gap: 10px; font-size: 13px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5FE3A1" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>설치 중에도 앱을 둘러볼 수 있습니다</span>
+            <span style="display: flex; align-items: center; gap: 10px; font-size: 13px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5FE3A1" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>모든 파일은 SHA256으로 검증합니다</span>
+          </div>
+        </div>
+      </sc-if>
+
+      <div style="flex: 1"></div>
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap">
+        <button onClick="{{skip}}" style="height: 44px; padding: 0 12px; border: 0; background: transparent; color: #9AA3B5; cursor: pointer">건너뛰기</button>
+        <span style="flex: 1"></span>
+        <sc-if value="{{canBack}}" hint-placeholder-val="{{false}}">
+          <button onClick="{{back}}" style="height: 48px; padding: 0 18px; border-radius: 12px; border: 1px solid #2E3442; background: transparent; color: #E8EAF0; font-weight: 600; cursor: pointer">이전</button>
+        </sc-if>
+        <button onClick="{{next}}" style="height: 48px; padding: 0 22px; border-radius: 12px; border: 0; background: #7C8CFF; color: #0E1014; font-weight: 700; font-size: 15px; cursor: pointer">{{nextLabel}}</button>
+      </div>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { step: 1, use: 'quality' };
+  }
+  renderVals() {
+    var self = this, st = this.state;
+    var deco = [];
+    for (var i = 0; i < 36; i++) {
+      var h = 12 + Math.abs(Math.sin(i * 0.55) * Math.cos(i * 0.21)) * 52;
+      deco.push({ h: h.toFixed(0) + 'px', o: (0.35 + (i / 36) * 0.65).toFixed(2) });
+    }
+    var useDefs = [
+      ['quality', '가장 자연스러운 음성', '유튜브·강의·오디오북용 고품질 한국어 · Supertonic 3', 'M12 3l2.4 5.6L20 11l-5.6 2.4L12 19l-2.4-5.6L4 11l5.6-2.4z'],
+      ['now', '설치 없이 바로', 'Windows에 들어 있는 음성으로 지금 시작 · Windows 음성', 'M13 2L4 14h7l-1 8 9-12h-7z'],
+      ['melo', '부드러운 억양', '뉴스·안내 방송처럼 또렷한 낭독 · MeloTTS', 'M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3zM5 11a7 7 0 0 0 14 0M12 18v3']
+    ];
+    var uses = useDefs.map(function (u) {
+      var on = st.use === u[0];
+      return { title: u[1], sub: u[2], d: u[3], pressed: on ? 'true' : 'false',
+        bg: on ? '#1B2140' : '#11141A', border: on ? '1px solid #7C8CFF' : '1px solid #262B38',
+        radio: on ? '6px solid #7C8CFF' : '2px solid #3A4152',
+        pick: function () { self.setState({ use: u[0] }); } };
+    });
+    var rec = {
+      quality: ['S3', '#232A45', '#9AA8FF', 'Supertonic 3', 'ONNX · 약 520MB · 프리셋 음성 10종', '세 엔진 중 가장 자연스럽고 빠릅니다. 한 번 내려받으면 오프라인에서도 동작합니다.', 'OpenRAIL-M 모델 라이선스의 사용 제한 조항을 읽었고 이에 동의합니다.', '필요 약 520MB', '설치하고 시작하기'],
+      now: ['Wi', '#1C2A2A', '#7EE0D2', 'Windows 음성', 'Windows 내장 · 다운로드 없음 · 한국어: Microsoft Heami', '지금 바로 쓸 수 있습니다. 음질은 기본 수준이라 나중에 Supertonic 3를 함께 쓰는 것을 권합니다.', 'Windows 라이선스에 따라 사용하며, 생성 음성의 상업적 이용 조건은 직접 확인하겠습니다.', '추가 용량 필요 없음', '바로 시작하기'],
+      melo: ['Me', '#2A2140', '#C6A8FF', 'MeloTTS', 'PyTorch · 약 2.1GB · 한국어 화자 1명', 'CPU에서 실시간으로 동작하는 또렷한 억양의 한국어 음성입니다.', 'MIT 라이선스를 확인했습니다.', '필요 약 2.1GB', '설치하고 시작하기']
+    }[st.use];
+    var go = function (n) { return function () { self.setState({ step: n }); }; };
+    return {
+      deco: deco, uses: uses,
+      s1: st.step === 1, s2: st.step === 2, s3: st.step === 3,
+      stepText: st.step + ' / 3', stepPct: (st.step / 3 * 100).toFixed(0) + '%',
+      recMark: rec[0], recMarkBg: rec[1], recMarkFg: rec[2], recName: rec[3], recMeta: rec[4], recWhy: rec[5], recLicense: rec[6], recNeed: rec[7],
+      canBack: st.step > 1,
+      back: go(Math.max(1, st.step - 1)),
+      next: go(st.step < 3 ? st.step + 1 : 1),
+      nextLabel: st.step === 1 ? '다음' : (st.step === 2 ? '이 엔진으로 계속' : rec[8]),
+      skip: go(1)
+    };
+  }
+}
+</script>
+</body>
+</html>

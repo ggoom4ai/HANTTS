@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>엔진 설치 진행</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+body{margin:0;background:#0E1014}
+a{color:#9AA8FF}a:hover{color:#C3CBFF}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="min-height: 900px; position: relative; display: flex; align-items: center; justify-content: center; padding: 40px 20px; box-sizing: border-box; background: #07080B; color: #E8EAF0; font-family: 'IBM Plex Sans KR', system-ui, sans-serif; font-size: 14px">
+  <div aria-hidden="true" style="position: absolute; inset: 0; display: flex; opacity: 0.35">
+    <div style="width: 84px; background: #0B0D11; border-right: 1px solid #1F2430"></div>
+    <div style="flex: 1; padding: 76px 32px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-content: start">
+      <div style="height: 300px; border-radius: 18px; background: #151820"></div>
+      <div style="height: 300px; border-radius: 18px; background: #151820"></div>
+      <div style="height: 300px; border-radius: 18px; background: #151820"></div>
+      <div style="height: 300px; border-radius: 18px; background: #151820"></div>
+      <div style="height: 300px; border-radius: 18px; background: #151820"></div>
+    </div>
+  </div>
+
+  <section role="dialog" aria-modal="true" aria-labelledby="dlg-title" style="position: relative; width: 100%; max-width: 660px; display: flex; flex-direction: column; background: #151820; border: 1px solid #2E3442; border-radius: 22px; box-shadow: 0 30px 80px #000000AA; overflow: hidden">
+    <div style="display: flex; align-items: center; gap: 14px; padding: 22px 24px 18px">
+      <span style="width: 44px; height: 44px; border-radius: 13px; background: #2A2140; color: #C6A8FF; display: flex; align-items: center; justify-content: center; font-weight: 700">Me</span>
+      <div style="flex: 1; display: flex; flex-direction: column; gap: 2px">
+        <h1 id="dlg-title" style="margin: 0; font-size: 19px; font-weight: 700">MeloTTS 설치</h1>
+        <span style="font-size: 13px; color: #9AA3B5">PyTorch(CPU) · 약 2.1GB · 한국어 공식 지원</span>
+      </div>
+      <button aria-label="닫기" style="width: 44px; height: 44px; border-radius: 12px; border: 0; background: transparent; color: #9AA3B5; cursor: pointer"><svg width="16" height="16" viewBox="0 0 12 12" aria-hidden="true"><path d="M1.5 1.5l9 9M10.5 1.5l-9 9" stroke="currentColor" stroke-width="1.4"/></svg></button>
+    </div>
+
+    <ol aria-label="설치 단계" style="list-style: none; margin: 0; padding: 0 24px 18px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px">
+      <sc-for list="{{stepper}}" as="s" hint-placeholder-count="4">
+        <li style="display: flex; flex-direction: column; gap: 8px">
+          <span style="height: 4px; border-radius: 2px; background: {{s.bar}}"></span>
+          <span style="font-size: 12px; font-weight: 600; color: {{s.fg}}">{{s.label}}</span>
+        </li>
+      </sc-for>
+    </ol>
+
+    <div style="padding: 20px 24px; border-top: 1px solid #222734; display: flex; flex-direction: column; gap: 18px">
+      <div style="display: flex; align-items: center; gap: 18px">
+        <div style="position: relative; width: 84px; height: 84px; flex: 0 0 84px">
+          <svg width="84" height="84" viewBox="0 0 84 84" role="img" aria-label="전체 진행률 58퍼센트">
+            <circle cx="42" cy="42" r="36" fill="none" stroke="#232835" stroke-width="8"/>
+            <circle cx="42" cy="42" r="36" fill="none" stroke="#7C8CFF" stroke-width="8" stroke-linecap="round" stroke-dasharray="131.2 226.2" transform="rotate(-90 42 42)"/>
+          </svg>
+          <span style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 18px">58%</span>
+        </div>
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 4px">
+          <span style="font-size: 16px; font-weight: 600">패키지 설치 중</span>
+          <span style="color: #9AA3B5">torch 2.x (CPU) 내려받는 중 · 18.2MB/s · 약 2분 남음</span>
+          <span style="font-size: 12px; color: #7F889B">다른 작업을 계속해도 됩니다. 끝나면 알려 드릴게요.</span>
+        </div>
+      </div>
+
+      <ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 6px 18px">
+        <sc-for list="{{steps}}" as="t" hint-placeholder-count="9">
+          <li style="display: flex; align-items: center; gap: 10px; min-height: 30px; font-size: 13px; color: {{t.fg}}">
+            <span style="width: 20px; height: 20px; flex: 0 0 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: {{t.bg}}; color: {{t.ic}}">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{t.d}}"/></svg>
+            </span>
+            <span style="flex: 1">{{t.label}}</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #7F889B">{{t.meta}}</span>
+          </li>
+        </sc-for>
+      </ul>
+
+      <details open style="background: #0B0D11; border: 1px solid #222734; border-radius: 12px">
+        <summary style="cursor: pointer; padding: 10px 14px; font-size: 13px; color: #C5CBD8">자세히 보기 (설치 로그)</summary>
+        <pre style="margin: 0; padding: 0 14px 12px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 1.7; color: #8E97AA; white-space: pre-wrap">✓ uv python install 3.10 … 완료 (cpython-3.10 · 29MB)
+✓ uv venv engines\melo\venv.new
+› uv pip install -r locks\melo-win_amd64.txt
+  Downloading torch (198.4MiB)  ████████████░░░░░░  64%
+  Resolved 58 packages · Prepared 31/58</pre>
+      </details>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 16px 24px; border-top: 1px solid #222734; background: #11141A">
+      <span style="flex: 1; font-size: 12px; color: #7F889B">취소하면 설치 전 상태로 되돌립니다.</span>
+      <button style="height: 44px; padding: 0 16px; border-radius: 12px; border: 1px solid #2E3442; background: transparent; color: #E8EAF0; font-weight: 600; cursor: pointer">취소</button>
+      <button style="height: 44px; padding: 0 18px; border-radius: 12px; border: 0; background: #7C8CFF; color: #0E1014; font-weight: 700; cursor: pointer">백그라운드에서 계속</button>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var stepper = [['요약', 'done'], ['라이선스 동의', 'done'], ['설치', 'now'], ['완료', 'wait']].map(function (s) {
+      return { label: s[0], bar: s[1] === 'wait' ? '#232835' : (s[1] === 'now' ? '#7C8CFF' : '#3DD68C'), fg: s[1] === 'wait' ? '#7F889B' : '#E8EAF0' };
+    });
+    var D = 'M5 12l5 5 9-10', N = 'M12 6v6l3 2', W = 'M12 12h.01';
+    var steps = [
+      ['사전 점검 (디스크·권한·네트워크)', 'done', ''],
+      ['Python 3.10 준비', 'done', '29MB'],
+      ['전용 가상환경 만들기', 'done', ''],
+      ['패키지 설치', 'now', '64%'],
+      ['모델 내려받기 · SHA256 검증', 'wait', '~0.9GB'],
+      ['한국어 사전·BERT 준비', 'wait', ''],
+      ['검증 합성', 'wait', ''],
+      ['적용', 'wait', '']
+    ].map(function (s) {
+      var st = s[1];
+      return { label: s[0], meta: s[2],
+        d: st === 'done' ? D : (st === 'now' ? N : W),
+        bg: st === 'done' ? '#12291F' : (st === 'now' ? '#1B2140' : '#1B1F29'),
+        ic: st === 'done' ? '#5FE3A1' : (st === 'now' ? '#9AA8FF' : '#4A5270'),
+        fg: st === 'wait' ? '#9AA3B5' : '#E8EAF0' };
+    });
+    return { stepper: stepper, steps: steps };
+  }
+}
+</script>
+</body>
+</html>

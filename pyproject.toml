@@ -1,0 +1,61 @@
+[project]
+name = "hantts"
+version = "0.1.0"
+description = "HanTTS Studio — CPU 기반 Windows 한국어 TTS 데스크톱 앱"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+  "PySide6>=6.8",
+  "numpy>=1.26",
+  "soundfile>=0.12",
+  "soxr>=0.3",
+  "pyloudnorm>=0.1",
+  "sounddevice>=0.4",
+  "httpx>=0.27",
+  "truststore>=0.9",
+  "tomli-w>=1.0",
+  # Windows 음성 엔진 (앱 본체에 번들, docs/03_ENGINES.md §3.3) — 버전은 Phase 0 T0.5 후 고정
+  "winrt-runtime>=2.0; sys_platform == 'win32'",
+  "winrt-Windows.Foundation>=2.0; sys_platform == 'win32'",
+  "winrt-Windows.Foundation.Collections>=2.0; sys_platform == 'win32'",
+  "winrt-Windows.Media.SpeechSynthesis>=2.0; sys_platform == 'win32'",
+  "winrt-Windows.Media.Core>=2.0; sys_platform == 'win32'",
+  "winrt-Windows.Storage.Streams>=2.0; sys_platform == 'win32'",
+  "comtypes>=1.4; sys_platform == 'win32'",
+]
+
+[project.scripts]
+hantts-cli = "hantts.cli:main"
+
+[project.gui-scripts]
+hantts = "hantts.__main__:main"
+
+[dependency-groups]
+dev = ["pytest>=8", "pytest-qt>=4.4", "ruff>=0.6", "mypy>=1.11", "pyinstaller>=6.10"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hantts"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "BLE"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+ignore_missing_imports = true
+mypy_path = "src"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+markers = [
+  "slow: 실제 엔진 설치/합성이 필요한 테스트",
+  "windows: Windows 음성 런타임이 필요한 테스트",
+]

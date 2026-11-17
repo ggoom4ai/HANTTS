@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>엔진 A/B 비교</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+body{margin:0;background:#0E1014}
+a{color:#9AA8FF}a:hover{color:#C3CBFF}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="min-height: 900px; display: flex; flex-direction: column; background: #0E1014; color: #E8EAF0; font-family: 'IBM Plex Sans KR', system-ui, sans-serif; font-size: 14px">
+  <header style="height: 48px; display: flex; align-items: center; gap: 10px; padding: 0 18px; border-bottom: 1px solid #1F2430; background: #0B0D11">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7C8CFF" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M3 12h2M7 8v8M11 4v16M15 8v8M19 11v2"/></svg>
+    <span style="font-weight: 700">HanTTS Studio</span>
+    <span style="color: #7F889B; font-size: 13px">· 비교</span>
+  </header>
+  <div style="flex: 1; display: flex; flex-wrap: wrap; min-height: 0">
+    <nav aria-label="주 메뉴" style="flex: 0 0 84px; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 14px 0; border-right: 1px solid #1F2430; background: #0B0D11">
+      <sc-for list="{{nav}}" as="item" hint-placeholder-count="6">
+        <a href="{{item.href}}" style="width: 68px; min-height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; border-radius: 12px; text-decoration: none; font-size: 12px; font-weight: 500; background: {{item.bg}}; color: {{item.fg}}">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{item.d}}"/></svg>
+          <span>{{item.label}}</span>
+        </a>
+      </sc-for>
+    </nav>
+
+    <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px; padding: 28px 32px">
+      <div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px">
+        <div style="flex: 1 1 420px; display: flex; flex-direction: column; gap: 6px">
+          <h1 style="margin: 0; font-size: 28px; font-weight: 700; letter-spacing: -0.02em">엔진 비교</h1>
+          <p style="margin: 0; color: #9AA3B5; font-size: 15px">같은 문장을 여러 엔진·음성으로 만들어 나란히 들어보세요.</p>
+        </div>
+        <button style="height: 44px; padding: 0 18px; border-radius: 12px; border: 0; background: #7C8CFF; color: #0E1014; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 8px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>
+          모두 생성
+        </button>
+      </div>
+
+      <label style="display: flex; flex-direction: column; gap: 8px">
+        <span style="font-size: 13px; color: #9AA3B5">비교할 문장</span>
+        <textarea rows="2" style="resize: vertical; padding: 14px 16px; background: #151820; border: 1px solid #2E3442; border-radius: 14px; color: #E8EAF0; font-family: inherit; font-size: 17px; line-height: 1.6">오늘 오후 3시 30분, 서울역 2번 출구에서 만나요. 늦으면 010-1234-5678로 연락 주세요.</textarea>
+      </label>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px">
+        <sc-for list="{{slots}}" as="s" hint-placeholder-count="3">
+          <article style="display: flex; flex-direction: column; gap: 14px; padding: 18px; background: #151820; border-radius: 18px; border: {{s.border}}">
+            <div style="display: flex; align-items: center; gap: 10px">
+              <span style="width: 30px; height: 30px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; background: #262B38; color: #E8EAF0">{{s.slot}}</span>
+              <div style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+                <span style="font-weight: 700">{{s.engine}}</span>
+                <span style="font-size: 12px; color: #9AA3B5">{{s.voice}}</span>
+              </div>
+              <sc-if value="{{s.badge}}" hint-placeholder-val="{{false}}"><span style="font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 999px; background: #1C2A2A; color: #7EE0D2">{{s.badge}}</span></sc-if>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px">
+              <sc-for list="{{s.params}}" as="p" hint-placeholder-count="3">
+                <span style="font-size: 12px; color: #C5CBD8; background: #1B1F29; border: 1px solid #262B38; padding: 4px 9px; border-radius: 8px">{{p}}</span>
+              </sc-for>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #0E1014; border-radius: 14px">
+              <button aria-label="{{s.playLabel}}" style="width: 44px; height: 44px; flex: 0 0 44px; border-radius: 50%; border: 0; background: {{s.playBg}}; color: {{s.playFg}}; cursor: pointer; display: flex; align-items: center; justify-content: center">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>
+              </button>
+              <div style="flex: 1; height: 40px; display: flex; align-items: center; gap: 2px; overflow: hidden" aria-hidden="true">
+                <sc-for list="{{s.bars}}" as="b" hint-placeholder-count="60">
+                  <span style="flex: 1 1 0; min-width: 1px; border-radius: 2px; height: {{b.h}}; background: {{b.c}}"></span>
+                </sc-for>
+              </div>
+            </div>
+            <dl style="margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+              <div style="display: flex; flex-direction: column; gap: 2px"><dt style="font-size: 11px; color: #7F889B">길이</dt><dd style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 13px">{{s.len}}</dd></div>
+              <div style="display: flex; flex-direction: column; gap: 2px"><dt style="font-size: 11px; color: #7F889B">생성 시간</dt><dd style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 13px">{{s.time}}</dd></div>
+              <div style="display: flex; flex-direction: column; gap: 2px"><dt style="font-size: 11px; color: #7F889B">숫자 읽기</dt><dd style="margin: 0; font-size: 13px; color: {{s.normColor}}">{{s.norm}}</dd></div>
+            </dl>
+            <div style="display: flex; gap: 8px; padding-top: 12px; border-top: 1px solid #222734">
+              <button aria-pressed="{{s.likedAria}}" style="flex: 1; height: 40px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 600; background: {{s.likeBg}}; color: {{s.likeFg}}; border: {{s.likeBorder}}">이게 좋아요</button>
+              <button style="flex: 1; height: 40px; border-radius: 10px; cursor: pointer; font-size: 13px; font-weight: 600; background: transparent; color: #C5CBD8; border: 1px solid #2E3442">프리셋으로 저장</button>
+            </div>
+          </article>
+        </sc-for>
+        <button style="min-height: 300px; border-radius: 18px; border: 1.5px dashed #2E3442; background: transparent; color: #9AA3B5; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; font-size: 14px">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          비교 슬롯 추가 (최대 4개)
+        </button>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":900}}'>
+class Component extends DCLogic {
+  renderVals() {
+    var navDefs = [
+      ['작업', 'Main.dc.html', 'M3 12h2M7 8v8M11 4v16M15 8v8M19 11v2'],
+      ['엔진', 'EngineManager.dc.html', 'M7 4h10a3 3 0 0 1 3 3v10a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3zM9 9h6v6H9z'],
+      ['일괄', 'Batch.dc.html', 'M12 3l9 5-9 5-9-5zM3 13l9 5 9-5'],
+      ['비교', 'Compare.dc.html', 'M4 5h7v14H4zM13 5h7v14h-7z'],
+      ['사전', '#', 'M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3zM5 17a3 3 0 0 1 3-3h11'],
+      ['기록', '#', 'M20 12a8 8 0 1 1-16 0a8 8 0 1 1 16 0zM12 8v4l3 2']
+    ];
+    var nav = navDefs.map(function (d, i) {
+      return { label: d[0], href: d[1], d: d[2], bg: i === 3 ? '#1B2140' : 'transparent', fg: i === 3 ? '#C3CBFF' : '#9AA3B5' };
+    });
+    var wave = function (seed, played, color) {
+      var out = [];
+      for (var i = 0; i < 60; i++) {
+        var h = 5 + Math.abs(Math.sin(i * 0.41 + seed) * Math.cos(i * 0.17 + seed * 2)) * 30;
+        out.push({ h: h.toFixed(1) + 'px', c: i < played ? color : '#2E3442' });
+      }
+      return out;
+    };
+    var mk = function (o) {
+      var on = !!o.liked;
+      return Object.assign(o, {
+        border: o.playing ? '1px solid #3A4680' : '1px solid #222734',
+        playBg: o.playing ? '#7C8CFF' : '#1B1F29', playFg: o.playing ? '#0E1014' : '#E8EAF0',
+        playLabel: o.slot + ' 재생',
+        likedAria: on ? 'true' : 'false',
+        likeBg: on ? '#12291F' : 'transparent', likeFg: on ? '#5FE3A1' : '#C5CBD8', likeBorder: on ? '1px solid #2A5A40' : '1px solid #2E3442'
+      });
+    };
+    return {
+      nav: nav,
+      slots: [
+        mk({ slot: 'A', engine: 'Supertonic 3', voice: '여성 1 · F1', params: ['속도 0.95x', '품질 스텝 5', '내장 정규화'],
+          bars: wave(0.2, 34, '#7C8CFF'), playing: true, liked: true,
+          len: '6.8초', time: '0.41초', norm: '정상', normColor: '#5FE3A1' }),
+        mk({ slot: 'B', engine: 'MeloTTS', voice: '한국어 · KR', params: ['속도 1.0x', 'sdp 0.2', 'noise 0.6'],
+          bars: wave(1.3, 0, '#7C8CFF'),
+          len: '7.4초', time: '2.9초', norm: '앱 변환 사용', normColor: '#C5CBD8' }),
+        mk({ slot: 'C', engine: 'Windows 음성', voice: 'Microsoft Heami · OneCore', badge: '내장', params: ['속도 1.0x', '음높이 1.0', '문장부호 쉼 기본'],
+          bars: wave(2.1, 0, '#7C8CFF'),
+          len: '6.2초', time: '0.18초', norm: '엔진 내장 처리', normColor: '#C5CBD8' })
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

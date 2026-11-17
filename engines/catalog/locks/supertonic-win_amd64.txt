@@ -1,0 +1,3 @@
+# 재생성:
+# uv pip compile --python-version 3.11 --python-platform x86_64-pc-windows-msvc requirements.in -o supertonic-win_amd64.txt --generate-hashes
+supertonic==1.3.1

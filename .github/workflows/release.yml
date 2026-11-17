@@ -1,0 +1,35 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - name: sync and test
+        run: |
+          uv sync --frozen
+          uv run ruff check .
+          uv run mypy src
+          uv run pytest -m "not slow"
+      - name: build
+        run: powershell -ExecutionPolicy Bypass -File installer\build.ps1
+      - name: checksums
+        shell: pwsh
+        run: |
+          Get-ChildItem dist -Recurse -File | ForEach-Object {
+            $hash = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower()
+            "$hash  $($_.FullName.Substring((Resolve-Path dist).Path.Length + 1))"
+          } | Set-Content dist\SHA256SUMS.txt
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/installer/*
+            dist/SHA256SUMS.txt

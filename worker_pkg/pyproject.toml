@@ -1,0 +1,24 @@
+[project]
+name = "hantts-worker"
+version = "0.1.0"
+description = "HanTTS 엔진 워커. schema, engines, JSON-RPC 만 담고 PySide6 는 넣지 않는다."
+requires-python = ">=3.11,<3.12"
+dependencies = [
+  "numpy>=1.26",
+  "soundfile>=0.12",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+bypass-selection = true
+
+[tool.hatch.build.targets.wheel.force-include]
+"../src/hantts/__init__.py" = "hantts/__init__.py"
+"../src/hantts/core/__init__.py" = "hantts/core/__init__.py"
+"../src/hantts/core/schema.py" = "hantts/core/schema.py"
+"../src/hantts/core/errors.py" = "hantts/core/errors.py"
+"../src/hantts/engines" = "hantts/engines"
+"../src/hantts/worker" = "hantts/worker"

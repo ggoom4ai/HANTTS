@@ -1,0 +1,147 @@
+/* HanTTS Studio — 다크 스튜디오 테마 (docs/12_UI_DESIGN.md)
+ * 이 파일은 템플릿이다. ${color.accent} 같은 자리표시자를 theme.py 가 design/tokens.json 값으로 치환한다.
+ * 규칙: 위젯은 objectName 또는 동적 속성(setProperty)으로만 스타일을 고른다. 코드에서 setStyleSheet 금지.
+ *   variant  = "primary" | "ghost" | "inverse" | "icon" | "chip"
+ *   role     = "card" | "panel" | "inspector" | "navrail" | "titlebar" | "dock"
+ *   tone     = "success" | "warning" | "danger" | "accent" | "muted"
+ * 속성 변경 후에는 widget.style().unpolish(w); polish(w) 호출 (theme.repolish 헬퍼 사용).
+ */
+
+* {
+  font-family: "${font.family_ui}", "${font.fallback_ui}";
+  font-size: ${font.size.base}px;
+  color: ${color.text};
+  outline: 0;
+}
+
+QMainWindow, QDialog, QWidget#AppRoot { background: ${color.bg}; }
+QToolTip { background: ${color.surface_raised}; color: ${color.text}; border: 1px solid ${color.border_strong}; border-radius: ${radius.sm}px; padding: 6px 8px; }
+
+/* ---------- 영역 ---------- */
+QWidget[role="titlebar"] { background: ${color.chrome}; border-bottom: 1px solid ${color.divider}; }
+QWidget[role="navrail"]  { background: ${color.chrome}; border-right: 1px solid ${color.divider}; }
+QWidget[role="inspector"]{ background: ${color.surface_alt}; border-left: 1px solid ${color.divider}; }
+QFrame[role="card"], QFrame[role="dock"] { background: ${color.surface}; border: 1px solid ${color.border}; border-radius: ${radius.xl}px; }
+QFrame[role="card"][selected="true"] { border: 1px solid ${color.accent_border}; }
+QFrame[role="tile"] { background: ${color.surface_alt}; border: 0; border-radius: ${radius.md}px; }
+QFrame[role="divider"] { background: ${color.divider}; max-height: 1px; min-height: 1px; border: 0; }
+
+/* ---------- 텍스트 ---------- */
+QLabel { background: transparent; }
+QLabel[text_role="h1"]       { font-size: ${font.size.h1}px; font-weight: ${font.weight.bold}; }
+QLabel[text_role="h2"]       { font-size: ${font.size.h2}px; font-weight: ${font.weight.bold}; }
+QLabel[text_role="title"]    { font-size: ${font.size.title_sm}px; font-weight: ${font.weight.bold}; }
+QLabel[text_role="section"]  { font-size: ${font.size.subtitle}px; font-weight: ${font.weight.semibold}; }
+QLabel[text_role="subtitle"] { font-size: ${font.size.subtitle}px; color: ${color.text_muted}; }
+QLabel[text_role="caption"]  { font-size: ${font.size.small}px; color: ${color.text_muted}; }
+QLabel[text_role="faint"]    { font-size: ${font.size.small}px; color: ${color.text_faint}; }
+QLabel[text_role="mono"]     { font-family: "${font.family_mono}"; font-size: ${font.size.small}px; color: ${color.text_muted}; }
+QLabel[text_role="value"]    { font-family: "${font.family_mono}"; font-size: ${font.size.body}px; background: ${color.surface_raised}; border-radius: 6px; padding: 2px 8px; }
+
+/* ---------- 배지 / 칩 ---------- */
+QLabel[variant="badge"] { font-size: ${font.size.small}px; font-weight: ${font.weight.semibold}; border-radius: 10px; padding: 3px 9px; }
+QLabel[variant="badge"][tone="success"] { background: ${color.success_bg}; color: ${color.success_text}; }
+QLabel[variant="badge"][tone="warning"] { background: ${color.warning_bg}; color: ${color.warning_text}; }
+QLabel[variant="badge"][tone="danger"]  { background: ${color.danger_bg};  color: ${color.danger_text}; }
+QLabel[variant="badge"][tone="accent"]  { background: ${color.accent};     color: ${color.on_accent}; font-weight: ${font.weight.bold}; }
+QLabel[variant="tag"] { font-size: ${font.size.small}px; font-weight: ${font.weight.bold}; color: ${color.warning}; background: ${color.warning_bg}; border-radius: 6px; padding: 1px 7px; }
+QLabel[variant="ext"] { font-family: "${font.family_mono}"; font-size: 10px; font-weight: ${font.weight.semibold}; color: ${color.text_secondary}; background: ${color.surface_raised}; border: 1px solid ${color.track}; border-radius: ${radius.xs}px; padding: 3px 6px; }
+
+/* ---------- 버튼 ---------- */
+QPushButton, QToolButton {
+  min-height: ${size.control_h}px; padding: 0 16px;
+  border-radius: ${radius.lg}px; border: 1px solid ${color.border_strong};
+  background: transparent; color: ${color.text}; font-weight: ${font.weight.medium};
+}
+QPushButton:hover, QToolButton:hover { background: ${color.surface_raised}; }
+QPushButton:pressed, QToolButton:pressed { background: ${color.track}; }
+QPushButton:focus, QToolButton:focus { border: 1px solid ${color.accent}; }
+QPushButton:disabled { color: ${color.text_disabled}; border-color: ${color.border}; }
+
+QPushButton[variant="primary"] { background: ${color.accent}; color: ${color.on_accent}; border: 0; font-weight: ${font.weight.bold}; }
+QPushButton[variant="primary"]:hover { background: ${color.accent_text}; }
+QPushButton[variant="primary"]:focus { border: 2px solid ${color.accent_soft}; }
+QPushButton[variant="inverse"] { background: ${color.inverse_bg}; color: ${color.inverse_text}; border: 0; font-weight: ${font.weight.bold}; }
+QPushButton[variant="ghost"] { border: 1px solid ${color.border_strong}; color: ${color.text_secondary}; }
+QPushButton[variant="flat"]  { border: 0; color: ${color.text_muted}; }
+QPushButton[size="sm"] { min-height: ${size.control_h_sm}px; padding: 0 12px; border-radius: ${radius.md}px; font-size: ${font.size.body}px; }
+
+QToolButton[variant="icon"] { min-height: ${size.icon_button}px; min-width: ${size.icon_button}px; padding: 0; border: 0; border-radius: ${radius.lg}px; }
+QToolButton[variant="play"] { min-height: ${size.play_button}px; min-width: ${size.play_button}px; max-width: ${size.play_button}px; padding: 0; border: 0; border-radius: 26px; background: ${color.accent}; }
+QToolButton[variant="play"]:hover { background: ${color.accent_text}; }
+
+/* 상단 선택기(엔진/언어/프리셋) */
+QToolButton[variant="selector"] { background: ${color.surface}; border: 1px solid ${color.border_strong}; padding: 0 14px 0 12px; text-align: left; }
+QToolButton[variant="selector"]::menu-indicator { image: none; }
+
+/* 내비게이션 레일 */
+QToolButton[variant="nav"] {
+  min-width: 68px; max-width: 68px; min-height: 58px; padding: 4px 0; border: 0; border-radius: ${radius.lg}px;
+  color: ${color.text_muted}; font-size: ${font.size.small}px; font-weight: ${font.weight.medium};
+}
+QToolButton[variant="nav"]:hover { background: ${color.surface}; }
+QToolButton[variant="nav"]:checked { background: ${color.accent_bg}; color: ${color.accent_soft}; }
+
+/* 세그먼트/칩 */
+QWidget[role="segmented"] { background: ${color.bg}; border: 1px solid ${color.track}; border-radius: ${radius.md}px; }
+QPushButton[variant="segment"] { min-height: ${size.control_h_xs}px; padding: 0 12px; border: 0; border-radius: ${radius.sm}px; color: ${color.text_muted}; font-size: ${font.size.body}px; }
+QPushButton[variant="segment"]:checked { background: ${color.track}; color: ${color.text}; font-weight: ${font.weight.semibold}; }
+QPushButton[variant="chip"] { min-height: ${size.control_h_sm}px; padding: 0 14px; border-radius: 18px; border: 1px solid ${color.border_strong}; color: ${color.text_secondary}; }
+QPushButton[variant="chip"]:checked { border: 1px solid ${color.accent}; background: ${color.accent_bg}; color: ${color.accent_soft}; font-weight: ${font.weight.semibold}; }
+QPushButton[variant="voice"] { min-height: 48px; padding: 0; border-radius: ${radius.lg}px; border: 1px solid ${color.track}; background: ${color.surface_raised}; color: ${color.text_secondary}; font-weight: ${font.weight.bold}; }
+QPushButton[variant="voice"]:checked { background: ${color.accent}; border-color: ${color.accent}; color: ${color.on_accent}; }
+
+/* ---------- 입력 ---------- */
+QLineEdit, QPlainTextEdit, QTextEdit, QComboBox, QSpinBox, QDoubleSpinBox {
+  background: ${color.surface}; border: 1px solid ${color.border_strong}; border-radius: ${radius.md}px;
+  padding: 0 12px; min-height: ${size.control_h}px; selection-background-color: ${color.accent_border};
+}
+QPlainTextEdit, QTextEdit { padding: 12px 14px; font-size: ${font.size.editor}px; }
+QLineEdit:focus, QPlainTextEdit:focus, QTextEdit:focus, QComboBox:focus { border: 1px solid ${color.accent}; }
+QLineEdit[mono="true"] { font-family: "${font.family_mono}"; font-size: ${font.size.small}px; }
+QComboBox::drop-down { border: 0; width: 28px; }
+QComboBox QAbstractItemView { background: ${color.surface_raised}; border: 1px solid ${color.border_strong}; selection-background-color: ${color.accent_bg}; padding: 4px; }
+
+QCheckBox { spacing: 10px; color: ${color.text_secondary}; }
+QCheckBox::indicator { width: 18px; height: 18px; border-radius: 5px; border: 1px solid ${color.border_strong}; background: ${color.surface_alt}; }
+QCheckBox::indicator:checked { background: ${color.accent}; border-color: ${color.accent}; }
+
+/* 기본 슬라이더 (커스텀 SliderRow 를 쓰지 않는 곳) */
+QSlider::groove:horizontal { height: ${size.slider_track_h}px; background: ${color.track}; border-radius: 2px; }
+QSlider::sub-page:horizontal { background: ${color.accent}; border-radius: 2px; }
+QSlider::handle:horizontal { width: ${size.slider_knob}px; height: ${size.slider_knob}px; margin: -6px 0; border-radius: 8px; background: ${color.text}; border: 3px solid ${color.accent_border}; }
+
+QProgressBar { min-height: ${size.progress_h}px; max-height: ${size.progress_h}px; border: 0; border-radius: 3px; background: ${color.track}; text-align: center; color: transparent; }
+QProgressBar::chunk { border-radius: 3px; background: ${color.accent}; }
+QProgressBar[tone="success"]::chunk { background: ${color.success}; }
+QProgressBar[tone="danger"]::chunk  { background: ${color.danger}; }
+
+/* ---------- 탭 ---------- */
+QTabBar::tab { min-height: ${size.control_h_sm}px; padding: 0 16px; margin: 3px; border-radius: ${radius.sm}px; color: ${color.text_muted}; font-weight: ${font.weight.semibold}; background: transparent; }
+QTabBar::tab:selected { background: ${color.track}; color: ${color.text}; }
+QTabWidget::pane { border: 0; }
+
+/* ---------- 목록 / 표 ---------- */
+QListView, QTreeView, QTableView { background: transparent; border: 0; alternate-background-color: transparent; }
+QHeaderView::section { background: transparent; color: ${color.text_muted}; font-size: ${font.size.small}px; font-weight: ${font.weight.medium}; border: 0; border-bottom: 1px solid ${color.border}; padding: 12px 16px; }
+QTableView::item { padding: 12px 16px; border-bottom: 1px solid #1C202B; }
+QTableView::item:selected, QListView::item:selected { background: ${color.accent_bg_row}; color: ${color.text}; }
+
+/* ---------- 스크롤바 ---------- */
+QScrollBar:vertical { width: 10px; background: transparent; margin: 4px 2px; }
+QScrollBar::handle:vertical { background: ${color.border_strong}; border-radius: 3px; min-height: 40px; }
+QScrollBar::handle:vertical:hover { background: ${color.text_disabled}; }
+QScrollBar:horizontal { height: 10px; background: transparent; margin: 2px 4px; }
+QScrollBar::handle:horizontal { background: ${color.border_strong}; border-radius: 3px; min-width: 40px; }
+QScrollBar::add-line, QScrollBar::sub-line, QScrollBar::add-page, QScrollBar::sub-page { width: 0; height: 0; background: none; }
+
+/* ---------- 배너 ---------- */
+QFrame[role="banner"] { border-radius: ${radius.md}px; padding: 10px 12px; }
+QFrame[role="banner"][tone="warning"] { background: #241D10; }
+QFrame[role="banner"][tone="warning"] QLabel { color: ${color.warning_text}; font-size: ${font.size.small}px; }
+QFrame[role="banner"][tone="danger"] { background: ${color.danger_bg}; }
+QFrame[role="banner"][tone="danger"] QLabel { color: ${color.danger_text}; font-size: ${font.size.small}px; }
+
+/* ---------- 대화상자 ---------- */
+QDialog[role="modal"] { background: ${color.surface}; border: 1px solid ${color.border_strong}; border-radius: ${radius.dialog}px; }
+QWidget[role="dialog_footer"] { background: ${color.surface_alt}; border-top: 1px solid ${color.border}; }

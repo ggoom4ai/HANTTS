@@ -1,0 +1,349 @@
+{
+  "schema_version": 1,
+  "catalog_version": "2026.11.1",
+  "engines": [
+    {
+      "id": "supertonic",
+      "display_name": "Supertonic 3",
+      "description_ko": "가장 빠르고 가벼운 한국어 엔진. 프리셋 음성 10종.",
+      "version": "3.0.0",
+      "korean_support": "official",
+      "python": "3.11",
+      "runtime": "onnx",
+      "approx_disk_mb": 520,
+      "approx_ram_mb": 900,
+      "lock_file": "locks/supertonic-win_amd64.txt",
+      "extra_index_urls": [],
+      "post_install": [],
+      "assets": [
+        {
+          "dest": "onnx/duration_predictor.onnx",
+          "sha256": "c3eb91414d5ff8a7a239b7fe9e34e7e2bf8a8140d8375ffb14718b1c639325db",
+          "size": 3700147,
+          "urls": [
+            "https://huggingface.co/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/onnx/duration_predictor.onnx",
+            "https://hf-mirror.com/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/onnx/duration_predictor.onnx"
+          ]
+        },
+        {
+          "dest": "onnx/text_encoder.onnx",
+          "sha256": "c7befd5ea8c3119769e8a6c1486c4edc6a3bc8365c67621c881bbb774b9902ff",
+          "size": 36416150,
+          "urls": [
+            "https://huggingface.co/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/onnx/text_encoder.onnx",
+            "https://hf-mirror.com/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/onnx/text_encoder.onnx"
+          ]
+        },
+        {
+          "dest": "onnx/vector_estimator.onnx",
+          "sha256": "883ac868ea0275ef0e991524dc64f16b3c0376efd7c320af6b53f5b780d7c61c",
+          "size": 256534781,
+          "urls": [
+            "https://huggingface.co/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/onnx/vector_estimator.onnx",
+            "https://hf-mirror.com/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/onnx/vector_estimator.onnx"
+          ]
+        },
+        {
+          "dest": "onnx/vocoder.onnx",
+          "sha256": "085de76dd8e8d5836d6ca66826601f615939218f90e519f70ee8a36ed2a4c4ba",
+          "size": 101424195,
+          "urls": [
+            "https://huggingface.co/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/onnx/vocoder.onnx",
+            "https://hf-mirror.com/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/onnx/vocoder.onnx"
+          ]
+        },
+        {
+          "dest": "onnx/tts.json",
+          "sha256": "42078d3aef1cd43ab43021f3c54f47d2d75ceb4e75f627f118890128b06a0d09",
+          "size": 8253,
+          "urls": [
+            "https://huggingface.co/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/onnx/tts.json",
+            "https://hf-mirror.com/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/onnx/tts.json"
+          ]
+        },
+        {
+          "dest": "onnx/unicode_indexer.json",
+          "sha256": "9bf7346e43883a81f8645c81224f786d43c5b57f3641f6e7671a7d6c493cb24f",
+          "size": 277676,
+          "urls": [
+            "https://huggingface.co/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/onnx/unicode_indexer.json",
+            "https://hf-mirror.com/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/onnx/unicode_indexer.json"
+          ]
+        },
+        {
+          "dest": "config.json",
+          "sha256": "4099082b107a9d4029849ac76b89eca65e03732660969c2babe5bf308c7357f2",
+          "size": 174,
+          "urls": [
+            "https://huggingface.co/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/config.json",
+            "https://hf-mirror.com/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/config.json"
+          ]
+        },
+        {
+          "dest": "voice_styles/F1.json",
+          "sha256": "bbdec6ee00231c2c742ad05483df5334cab3b52fda3ba38e6a07059c4563dbc2",
+          "size": 292046,
+          "urls": [
+            "https://huggingface.co/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/voice_styles/F1.json",
+            "https://hf-mirror.com/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/voice_styles/F1.json"
+          ]
+        },
+        {
+          "dest": "voice_styles/F2.json",
+          "sha256": "7c722c6a72707b1a77f035d67f0d1351ba187738e06f7683e8c72b1df3477fc6",
+          "size": 292423,
+          "urls": [
+            "https://huggingface.co/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/voice_styles/F2.json",
+            "https://hf-mirror.com/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/voice_styles/F2.json"
+          ]
+        },
+        {
+          "dest": "voice_styles/F3.json",
+          "sha256": "12f6ef2573baa2defa1128069cb59f203e3ab67c92af77b42df8a0e3a2f7c6ab",
+          "size": 290794,
+          "urls": [
+            "https://huggingface.co/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/voice_styles/F3.json",
+            "https://hf-mirror.com/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/voice_styles/F3.json"
+          ]
+        },
+        {
+          "dest": "voice_styles/F4.json",
+          "sha256": "c2fa764c1225a76dfc3e2c73e8aa4f70d9ee48793860eb34c295fff01c2e032b",
+          "size": 291808,
+          "urls": [
+            "https://huggingface.co/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/voice_styles/F4.json",
+            "https://hf-mirror.com/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/voice_styles/F4.json"
+          ]
+        },
+        {
+          "dest": "voice_styles/F5.json",
+          "sha256": "45966e73316415626cf41a7d1c6f3b4c70dbc1ba2bee5c1978ef0ce33244fc8d",
+          "size": 291479,
+          "urls": [
+            "https://huggingface.co/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/voice_styles/F5.json",
+            "https://hf-mirror.com/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/voice_styles/F5.json"
+          ]
+        },
+        {
+          "dest": "voice_styles/M1.json",
+          "sha256": "e35604687f5d23694b8e91593a93eec0e4eca6c0b02bb8ed69139ab2ea6b0a5b",
+          "size": 291748,
+          "urls": [
+            "https://huggingface.co/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/voice_styles/M1.json",
+            "https://hf-mirror.com/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/voice_styles/M1.json"
+          ]
+        },
+        {
+          "dest": "voice_styles/M2.json",
+          "sha256": "b76cbf62bac707c710cf0ae5aba5e31eea1a6339a9734bfae33ab98499534a50",
+          "size": 292055,
+          "urls": [
+            "https://huggingface.co/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/voice_styles/M2.json",
+            "https://hf-mirror.com/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/voice_styles/M2.json"
+          ]
+        },
+        {
+          "dest": "voice_styles/M3.json",
+          "sha256": "ea1ac35ccb91b0d7ecad533a2fbd0eec10c91513d8951e3b25fbba99954e159b",
+          "size": 290198,
+          "urls": [
+            "https://huggingface.co/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/voice_styles/M3.json",
+            "https://hf-mirror.com/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/voice_styles/M3.json"
+          ]
+        },
+        {
+          "dest": "voice_styles/M4.json",
+          "sha256": "ca8eefad4fcd989c9379032ff3e50738adc547eeb5e221b82593a6d7b3bac303",
+          "size": 291522,
+          "urls": [
+            "https://huggingface.co/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/voice_styles/M4.json",
+            "https://hf-mirror.com/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/voice_styles/M4.json"
+          ]
+        },
+        {
+          "dest": "voice_styles/M5.json",
+          "sha256": "dd22b92740314321f8ae11c5e87f8dd60d060f15dd3a632b5adf77f471f77af2",
+          "size": 291469,
+          "urls": [
+            "https://huggingface.co/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/voice_styles/M5.json",
+            "https://hf-mirror.com/Supertone/supertonic-3/resolve/3cadd1ee6394adea1bd021217a0e650ede09a323/voice_styles/M5.json"
+          ]
+        }
+      ],
+      "licenses": [
+        {
+          "name": "BigScience OpenRAIL-M (모델 가중치)",
+          "url": "https://huggingface.co/Supertone/supertonic-3",
+          "requires_consent": true,
+          "default_checked": true
+        },
+        {
+          "name": "MIT (샘플 코드)",
+          "url": "https://github.com/supertone-inc/supertonic",
+          "requires_consent": false
+        }
+      ],
+      "notices_ko": [
+        "개발사 해산으로 공식 업데이트가 없습니다. 검증된 미러에서 내려받습니다."
+      ],
+      "worker_env": {}
+    },
+    {
+      "id": "melo",
+      "display_name": "MeloTTS",
+      "description_ko": "자연스러운 한국어 억양, CPU 실시간. 한국어 화자 1명. (ONNX)",
+      "version": "kr-onnx-gnyong-c110131",
+      "korean_support": "official",
+      "python": "3.11",
+      "runtime": "onnx",
+      "approx_disk_mb": 300,
+      "approx_ram_mb": 700,
+      "lock_file": "locks/melo-win_amd64.txt",
+      "extra_index_urls": [],
+      "post_install": [],
+      "assets": [
+        {
+          "dest": "melotts_kr.onnx",
+          "sha256": "a2450570c59a18361717842c25a1800cb8a67d150d9b3f1dc05d253c4e2220e9",
+          "size": 170506511,
+          "urls": [
+            "https://huggingface.co/gnyong/melotts-kr-onnx/resolve/c11013196ea7efe6ee06b418ec679212770533f7/melotts_kr_fp32.onnx",
+            "https://hf-mirror.com/gnyong/melotts-kr-onnx/resolve/c11013196ea7efe6ee06b418ec679212770533f7/melotts_kr_fp32.onnx"
+          ]
+        },
+        {
+          "dest": "symbols.json",
+          "sha256": "bf8d22eefcbe576116e4c5b6e1dcef1b3d59fa1ed5333007048a901a84aa1bc3",
+          "size": 9645,
+          "urls": [
+            "https://huggingface.co/gnyong/melotts-kr-onnx/resolve/c11013196ea7efe6ee06b418ec679212770533f7/symbols.json",
+            "https://hf-mirror.com/gnyong/melotts-kr-onnx/resolve/c11013196ea7efe6ee06b418ec679212770533f7/symbols.json"
+          ]
+        },
+        {
+          "dest": "melotts_kr_config.json",
+          "sha256": "74543376976dfadde45ba34336fa79c7e95509f43a7c2e701b22c0f71fd7695c",
+          "size": 3405,
+          "urls": [
+            "https://huggingface.co/gnyong/melotts-kr-onnx/resolve/c11013196ea7efe6ee06b418ec679212770533f7/melotts_kr_config.json",
+            "https://hf-mirror.com/gnyong/melotts-kr-onnx/resolve/c11013196ea7efe6ee06b418ec679212770533f7/melotts_kr_config.json"
+          ]
+        },
+        {
+          "dest": "vocab.txt",
+          "sha256": "25a329a892130c73f7dffd6aafa0382d713f93633ef320e49ea54a449096a089",
+          "size": 344259,
+          "urls": [
+            "https://huggingface.co/kykim/bert-kor-base/resolve/1779cc0982ada0216dd6de0dd4e86fb78201926d/vocab.txt",
+            "https://hf-mirror.com/kykim/bert-kor-base/resolve/1779cc0982ada0216dd6de0dd4e86fb78201926d/vocab.txt"
+          ]
+        }
+      ],
+      "licenses": [
+        {
+          "name": "MIT (MeloTTS, gnyong 변환본)",
+          "url": "https://huggingface.co/gnyong/melotts-kr-onnx",
+          "requires_consent": false,
+          "default_checked": true
+        },
+        {
+          "name": "kykim/bert-kor-base (BERT 사용 시, 라이선스 확인 필요)",
+          "url": "https://huggingface.co/kykim/bert-kor-base",
+          "requires_consent": false,
+          "default_checked": true
+        }
+      ],
+      "worker_env": {},
+      "_note": "gnyong/melotts-kr-onnx 커밋 c11013196ea7efe6ee06b418ec679212770533f7. 자체 Release 미러는 아직 없다. vocab.txt 는 음소 정렬용이며 BERT 가중치는 넣지 않는다. docs/14 §2.",
+      "optional_assets": [
+        {
+          "id": "int8",
+          "label_ko": "작은 모델 (int8, 53MB) — T0.6 청취 통과 시 기본값으로 교체",
+          "files": [
+            {
+              "dest": "melotts_kr.onnx",
+              "sha256": "421b94ce7e803fdd0126c7d39d90192b64878794619668cf3ec12611fc860f88",
+              "size": 53465508,
+          "urls": [
+            "https://huggingface.co/gnyong/melotts-kr-onnx/resolve/c11013196ea7efe6ee06b418ec679212770533f7/melotts_kr_int8.onnx",
+            "https://hf-mirror.com/gnyong/melotts-kr-onnx/resolve/c11013196ea7efe6ee06b418ec679212770533f7/melotts_kr_int8.onnx"
+          ]
+            }
+          ]
+        },
+        {
+          "id": "bert",
+          "label_ko": "한국어 BERT 특징 (T0.6에서 BERT 사용으로 판정된 경우만)",
+          "files": [
+            {
+              "dest": "bert_kr.int8.onnx",
+              "sha256": "TODO",
+              "size": 0,
+              "urls": [
+                "https://github.com/<org>/hantts-models/releases/download/melo-kr-onnx-<날짜>/bert_kr.int8.onnx"
+              ]
+            },
+            {
+              "dest": "tokenizer/tokenizer.json",
+              "sha256": "TODO",
+              "size": 0,
+              "urls": [
+                "https://github.com/<org>/hantts-models/releases/download/melo-kr-onnx-<날짜>/tokenizer.json"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "windows",
+      "display_name": "Windows 음성",
+      "description_ko": "Windows에 들어 있는 음성 합성. 다운로드 없이 바로 쓰며 SSML과 단어 단위 자막을 지원합니다.",
+      "version": "builtin",
+      "korean_support": "official",
+      "runtime": "builtin",
+      "worker": {
+        "command": "self",
+        "args": [
+          "--worker",
+          "windows"
+        ]
+      },
+      "backends": [
+        "onecore",
+        "sapi"
+      ],
+      "approx_disk_mb": 0,
+      "approx_ram_mb": 120,
+      "requirements": [
+        {
+          "type": "windows_build",
+          "min": 16299,
+          "note_ko": "속도·피치·볼륨 옵션은 Windows 10 1709 이상"
+        },
+        {
+          "type": "voice_language",
+          "lang": "ko-KR",
+          "fix": {
+            "settings_uri": "ms-settings:speech",
+            "capability": "Language.TextToSpeech~~~ko-KR~0.0.1.0",
+            "elevated_command": "Add-WindowsCapability -Online -Name 'Language.TextToSpeech~~~ko-KR~0.0.1.0'"
+          }
+        }
+      ],
+      "assets": [],
+      "licenses": [
+        {
+          "name": "Windows 구성요소 (Windows 라이선스 적용)",
+          "url": "https://www.microsoft.com/useterms",
+          "requires_consent": false
+        }
+      ],
+      "notices_ko": [
+        "음질은 기본 수준입니다. 고품질이 필요하면 Supertonic 3를 쓰세요.",
+        "생성한 음성의 상업적 이용 조건은 Windows 라이선스를 확인하세요."
+      ],
+      "worker_env": {}
+    }
+  ]
+}

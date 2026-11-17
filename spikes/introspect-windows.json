@@ -1,0 +1,10 @@
+{
+  "import": "winrt.windows.media.speechsynthesis.SpeechSynthesizer",
+  "korean_voice": "Microsoft Heami",
+  "language": "ko-KR",
+  "sample_rate": 16000,
+  "smoke_text": "안녕하세요. 2026년 11월 16일입니다.",
+  "duration_sec": 5.11,
+  "rtf": 0.085,
+  "word_timestamps": "empty"
+}
